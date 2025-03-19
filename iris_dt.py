@@ -50,6 +50,6 @@ with mlflow.start_run():
     
     mlflow.log_artifact(__file__)
     mlflow.sklearn.log_model(dt,"decision_tree")
-    mlflow.set_tag("authot", "basant")
+    mlflow.set_tag("author", "basant")
     mlflow.set_tag("model","Decision tree")
     print("accuracy", accuracy)
