@@ -1,7 +1,7 @@
 import mlflow
 import mlflow.sklearn
 from sklearn.datasets import load_iris
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, confusion_matrix
 import matplotlib.pyplot as plt
@@ -22,14 +22,14 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Define the parameter
 max_depth = 5
-
+n_estimators=100
 mlflow.set_experiment('iris_dt')
 mlflow.set_tracking_uri('https://dagshub.com/Basant2206/dagshub_mlflow_demo.mlflow')
 # apply mlflow
 with mlflow.start_run():
-    dt= DecisionTreeClassifier(max_depth=max_depth)
-    dt.fit(X_train, y_train)
-    y_pred= dt.predict(X_test)
+    rf= RandomForestClassifier(max_depth=max_depth, n_estimators=n_estimators)
+    rf.fit(X_train, y_train)
+    y_pred= rf.predict(X_test)
 
     accuracy = accuracy_score(y_test, y_pred)
 
@@ -50,6 +50,6 @@ with mlflow.start_run():
     
     mlflow.log_artifact(__file__)
     mlflow.sklearn.log_model(dt,"decision_tree")
-    mlflow.set_tag("author", "basant")
+    mlflow.set_tag("author", "bas")
     mlflow.set_tag("model","Decision tree")
     print("accuracy", accuracy)
