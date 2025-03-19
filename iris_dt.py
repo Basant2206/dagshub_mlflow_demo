@@ -6,6 +6,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
+import dagshub
+dagshub.init(repo_owner='Basant2206', repo_name='dagshub_mlflow_demo', mlflow=True)
+
 
 
 # load dataset
@@ -20,8 +23,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # Define the parameter
 max_depth = 3
 
-#mlflow.set_experiment('iris_dt')
-mlflow.set_tracking_uri('http://localhost:5000')
+mlflow.set_experiment('iris_dt')
+mlflow.set_tracking_uri('https://dagshub.com/Basant2206/dagshub_mlflow_demo.mlflow')
 # apply mlflow
 with mlflow.start_run():
     dt= DecisionTreeClassifier(max_depth=max_depth)
